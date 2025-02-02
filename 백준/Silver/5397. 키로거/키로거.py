@@ -1,8 +1,3 @@
-# test case
-# 2
-# <<BP<A>>Cd-
-# ThIsIsS3Cr3t
-
 import sys
 input = sys.stdin.readline
 
@@ -25,6 +20,6 @@ for _ in range(n):
         else:
             stack_l.append(i)
 
-    print(''.join(stack_l + list(reversed(stack_r))))
-
-
+    # print(''.join(stack_l + list(reversed(stack_r))))
+    stack_r.reverse()
+    print(''.join(stack_l + stack_r))
