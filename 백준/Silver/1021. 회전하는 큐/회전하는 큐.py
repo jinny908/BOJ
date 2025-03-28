@@ -8,17 +8,12 @@ queue = deque(i for i in range(1,n+1))
 cnt = 0
 
 for i in position:
-    while True:
-        if queue[0] == i:
-            queue.popleft()
-            break
-        else:
-            if queue.index(i) < len(queue) / 2:
-                while queue[0] != i:
-                    queue.append(queue.popleft())
-                    cnt += 1
-            else:
-                while queue[0] != i:
-                    queue.appendleft(queue.pop())
-                    cnt += 1
+    idx = queue.index(i) # idx = 0 based index 임
+    if idx <= len(queue) // 2:
+        queue.rotate(-idx)
+        cnt += idx
+    else:
+        queue.rotate(len(queue) - idx)
+        cnt += len(queue) - idx
+    queue.popleft()
 print(cnt)
