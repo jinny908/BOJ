@@ -1,9 +1,9 @@
 import sys
 
-# input = sys.stdin.readline
+input = sys.stdin.readline
 
 while True:
-    word = input()
+    word = input().rstrip()
     stack = []
 
     if word =='.':
