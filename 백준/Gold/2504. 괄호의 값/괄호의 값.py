@@ -1,56 +1,33 @@
-import sys
-input = sys.stdin.readline
+arr=input()
+stack=[]
 
-arr = input().strip()
-stack = []
-
-for char in arr:
-    if char == '(' or char == '[':
-        stack.append(char)
-    elif char == ')':
-        temp = 0
-        found = False
-        while stack:
-            top = stack.pop()
-            if top == '(':
-                stack.append(2 if temp == 0 else 2 * temp)
-                found = True
-                break
-            elif isinstance(top, int):
-                temp += top
-            else:
-                print(0)
-                sys.exit()
-        if not found:
-            print(0)
-            sys.exit()
-    elif char == ']':
-        temp = 0
-        found = False
-        while stack:
-            top = stack.pop()
-            if top == '[':
-                stack.append(3 if temp == 0 else 3 * temp)
-                found = True
-                break
-            elif isinstance(top, int):
-                temp += top
-            else:
-                print(0)
-                sys.exit()
-        if not found:
-            print(0)
-            sys.exit()
+answer=0
+tmp=1
+for i in range(len(arr)):
+    if arr[i] =='(':
+        stack.append(arr[i])
+        tmp *=2
+    elif arr[i] == '[':
+        stack.append(arr[i])
+        tmp *=3
+    elif arr[i] == ")":
+        if not stack or stack[-1] == "[":
+            answer = 0 # 실패
+            break
+        if arr[i-1] == "(":
+            answer += tmp
+        stack.pop()
+        tmp //= 2  #tmp 초기화
     else:
-        print(0)
-        sys.exit()
+        if not stack or stack[-1] == "(":
+            answer=0
+            break
+        if arr[i-1] =='[':
+            answer+=tmp
+        stack.pop()
+        tmp //=3 #tmp 초기화
 
-result = 0
-for num in stack:
-    if isinstance(num, int):
-        result += num
-    else:
-        print(0)
-        sys.exit()
-
-print(result)
+if stack:
+    print(0)
+else:
+    print(answer)
