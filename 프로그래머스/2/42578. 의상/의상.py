@@ -1,14 +1,14 @@
 def solution(clothes):
-    dictionary = {}
+    dict = {}
     
-    for name, kind in clothes:
-        if kind in dictionary:
-            dictionary[kind] += 1
+    for name, category in clothes:
+        if category in dict:
+            dict[category] += 1
         else:
-            dictionary[kind] = 1
+            dict[category] = 1
+    
     answer = 1
-    for v in dictionary.values():
-        answer *= (v+1)
+    for cnt in dict.values():
+        answer *= (cnt + 1)
         
     return answer - 1
-        
