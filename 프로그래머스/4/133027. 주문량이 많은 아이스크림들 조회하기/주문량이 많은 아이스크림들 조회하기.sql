@@ -5,26 +5,14 @@ group by a.flavor
 order by a.total_order + sum(b.total_order) desc
 limit 3;
 
-# select a.flavor from first_half a join july b on a.shipment_id = b.shipment_id
-# group by a.flavor
-# order by (a.total_order + b.total_order) desc
+
+# with julysum as
+# (
+# select flavor, sum(total_order) as total_order from july
+# group by flavor
+# )
+
+# select a.flavor from first_half a join julysum b on a.flavor = b.flavor
+# order by a.total_order + b.total_order desc
 # limit 3
-
 # ;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
